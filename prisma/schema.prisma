@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  name      String
+  role      Role      @default(KASIR)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  sales     Sale[]
+}
+
+enum Role {
+  ADMIN
+  KASIR
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id              Int               @id @default(autoincrement())
+  name            String
+  description     String?
+  price           Decimal            @db.Decimal(10, 2)
+  cost            Decimal            @db.Decimal(10, 2) @default(0)
+  stock           Int               @default(0)
+  minStock        Int               @default(10)
+  imageUrl        String?
+  categoryId      Int?
+  category        Category?         @relation(fields: [categoryId], references: [id])
+  saleItems       SaleItem[]
+  stockMovements  StockMovement[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+}
+
+model StockMovement {
+  id         Int              @id @default(autoincrement())
+  productId  Int
+  product    Product          @relation(fields: [productId], references: [id])
+  quantity   Int
+  type       StockMovementType
+  note       String?
+  createdAt  DateTime         @default(now())
+}
+
+enum StockMovementType {
+  IN
+  OUT
+  ADJUSTMENT
+}
+
+model Sale {
+  id             Int            @id @default(autoincrement())
+  items          SaleItem[]
+  subtotal       Decimal        @db.Decimal(10, 2)
+  discount      Decimal        @db.Decimal(10, 2) @default(0)
+  tax            Decimal        @db.Decimal(10, 2) @default(0)
+  total          Decimal        @db.Decimal(10, 2)
+  paymentMethod  PaymentMethod
+  amountPaid     Decimal        @db.Decimal(10, 2)
+  change         Decimal        @db.Decimal(10, 2)
+  userId         Int
+  user           User           @relation(fields: [userId], references: [id])
+  createdAt     DateTime       @default(now())
+}
+
+model SaleItem {
+  id        Int     @id @default(autoincrement())
+  saleId    Int
+  sale     Sale    @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  productId Int
+  product  Product @relation(fields: [productId], references: [id])
+  quantity Int
+  price    Decimal @db.Decimal(10, 2)
+  subtotal  Decimal @db.Decimal(10, 2)
+}
+
+enum PaymentMethod {
+  CASH
+  QRIS
+  TRANSFER
+}
+
+model AIInsight {
+  id          Int         @id @default(autoincrement())
+  type        AIInsightType
+  title       String
+  content     String
+  confidence  Float
+  generatedAt DateTime    @default(now())
+}
+
+enum AIInsightType {
+  RESTOCK
+  TREND
+  FORECAST
+  INSIGHT
+}
+
+model DailySummary {
+  id                Int       @id @default(autoincrement())
+  date              DateTime  @unique
+  totalSales        Decimal   @db.Decimal(10, 2)
+  totalItems        Int
+  totalTransactions Int
+  createdAt         DateTime  @default(now())
+}
