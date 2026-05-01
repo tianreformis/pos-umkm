@@ -189,9 +189,9 @@ useEffect(() => {
           {tab === 'dashboard' && (
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm"><p className="text-sm text-gray-500">Pendapatan Hari Ini</p><p className="text-2xl font-bold">{formatCurrency(dailyData?.totalSales || 0)}</p></div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm"><p className="text-sm text-gray-500">Transaksi</p><p className="text-2xl font-bold">{dailyData?.totalTransactions || 0}</p></div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm"><p className="text-sm text-gray-500">Items Terjual</p><p className="text-2xl font-bold">{dailyData?.totalItems || 0}</p></div>
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm"><p className="text-sm text-gray-500">Pendapatan Hari Ini</p><p className="text-2xl font-bold">{formatCurrency(dailyData?.summary?.totalSales || 0)}</p></div>
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm"><p className="text-sm text-gray-500">Transaksi</p><p className="text-2xl font-bold">{dailyData?.summary?.totalTransactions || 0}</p></div>
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm"><p className="text-sm text-gray-500">Items Terjual</p><p className="text-2xl font-bold">{dailyData?.summary?.totalItems || 0}</p></div>
                 <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm"><p className="text-sm text-gray-500">Stok Menipis</p><p className="text-2xl font-bold">{products.filter(p => p.stock <= p.minStock).length}</p></div>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
