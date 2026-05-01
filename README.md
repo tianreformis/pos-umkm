@@ -246,4 +246,4 @@ MIT License
 
 ## Author
 @tianreformis
-UMKN POS - Point of Sale untuk UMKM
+UMKN POS - Point of Sale untuk UMKM 
