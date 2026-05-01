@@ -1,4 +1,4 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
+export const API_URL = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
 
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
@@ -9,7 +9,8 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
     ...options.headers,
   };
   
-  const url = endpoint.startsWith('http') ? endpoint : `${API_URL}${endpoint}`;
+  const baseUrl = API_URL || '';
+  const url = endpoint.startsWith('http') ? endpoint : `${baseUrl}${endpoint}`;
   const res = await fetch(url, { ...options, headers });
   
   if (!res.ok) {
