@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = { 
-  title: 'UMKN POS', 
+  title: 'TokoPintar', 
   description: 'Point of Sale for SMEs' 
 };
 

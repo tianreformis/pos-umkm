@@ -57,7 +57,7 @@ function LoginPage({ onLogin }: { onLogin: (u: any, t: string) => void }) {
       <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4"><ShoppingCart className="w-8 h-8 text-primary-600" /></div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">UMKN POS</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">TokoPintar</h1>
           <p className="text-gray-500 dark:text-gray-400">Point of Sale untuk UMKM</p>
         </div>
         <form onSubmit={handle} className="space-y-4">
@@ -166,7 +166,7 @@ useEffect(() => {
         <div className="p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center"><ShoppingCart className="w-5 h-5 text-primary-600" /></div>
-            <div className="hidden lg:block"><h1 className="font-bold text-gray-900 dark:text-white">UMKN POS</h1></div>
+            <div className="hidden lg:block"><h1 className="font-bold text-gray-900 dark:text-white">TokoPintar</h1></div>
           </div>
         </div>
         <nav className="flex-1 p-2 space-y-1">
@@ -446,7 +446,7 @@ function ReportsTab() {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Laporan ${periodLabel} - UMKN POS</title>
+  <title>Laporan ${periodLabel} - TokoPintar</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; }
     h1 { text-align: center; margin-bottom: 5px; }
@@ -463,7 +463,7 @@ function ReportsTab() {
 </head>
 <body>
   <h1>LAPORAN PENJUALAN ${periodLabel.toUpperCase()}</h1>
-  <p class="subtitle">UMKN POS - ${date}</p>
+  <p class="subtitle">TokoPintar - ${date}</p>
   
   <div class="summary">
     <div class="summary-box">
@@ -527,7 +527,7 @@ function ReportsTab() {
   </table>
   
   <p style="margin-top: 30px; text-align: center; color: #999; font-size: 12px;">
-    Dicetak dari UMKN POS - ${new Date().toLocaleString('id-ID')}
+    Dicetak dari TokoPintar - ${new Date().toLocaleString('id-ID')}
   </p>
 </body>
 </html>
